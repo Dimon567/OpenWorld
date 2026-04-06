@@ -1,13 +1,28 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class InventaryCellController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _label;
     [SerializeField] private Image _imageItem;
+
     private Image _imageFrame;
     private Item _item;
+    private int index = -1;
+
+    public static UnityEvent<int> SelectItem = new UnityEvent<int>();
+
+    public int Index
+    {
+        get { return index; }
+        set { 
+            if(index == -1)
+                index = value; 
+        }
+    }
+
     public Item DataItem
     {
         set
@@ -33,6 +48,7 @@ public class InventaryCellController : MonoBehaviour
     private void Start()
     {
         _imageFrame = GetComponent<Image>();
+        GetComponent<Button>().onClick.AddListener(OnSelect);
     }
 
     public void Select(bool isSelect)
@@ -42,5 +58,11 @@ public class InventaryCellController : MonoBehaviour
             _label.enabled = isSelect;
             _imageFrame.enabled = isSelect;
         }
+    }
+
+    private void OnSelect()
+    {
+        Select(true);
+        SelectItem.Invoke(index);
     }
 }

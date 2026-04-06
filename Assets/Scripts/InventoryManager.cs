@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InventaryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private List<Item> _inventary = new List<Item>(15);
 
-    public UnityEvent UpdateInverntaryEvent;
+    public UnityEvent UpdateInverntaryEvent = new UnityEvent();
 
     private int _selectCell;
 
+    public int Count
+    {
+        get { return _inventary.Count; }
+    }
+
     public int SelectCell
     {
-        set { 
-            if(value >= 0 || value)
+        set {
+            if (value >= 0 || value < _inventary.Count) { 
+                _selectCell = value;
+                UpdateInverntaryEvent.Invoke();
+            }
+        }
+        get { 
+            return _selectCell; 
         }
     }
 
@@ -24,18 +35,16 @@ public class InventaryManager : MonoBehaviour
         } 
     }
 
-    public Item RemoveItemAt(int index)
+    public void RemoveItemAt(int index)
     {
         if (index < 0 || index >= _inventary.Count)
         {
-            return null;
+            return;
         }
 
-        Item item = _inventary[index];
         _inventary[index] = null;
 
         UpdateInverntaryEvent.Invoke();
-        return item;
     }
 
     public bool AddItem(Item item, int index)
@@ -71,11 +80,23 @@ public class InventaryManager : MonoBehaviour
             return false;
         }
 
-        if (_inventary[index] != null)
-        {
-            return false;
-        }
+        return _inventary[index] == null;
+    }
 
-        return true;
+
+    private void OnSelectCell(int index)
+    {
+        SelectCell = index;
+        Debug.Log(1);
+    }
+
+    private void OnEnable()
+    {
+        InventaryCellController.SelectItem.AddListener(OnSelectCell);
+    }
+
+    private void OnDisable()
+    {
+        InventaryCellController.SelectItem.RemoveListener(OnSelectCell);
     }
 }

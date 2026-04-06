@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _speed;
     [SerializeField] private bool _isRun; 
 
-    public InventaryManager inventary;
+    public InventoryManager inventary;
     public Vector2 direction;
 
     void Start()

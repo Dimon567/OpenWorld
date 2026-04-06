@@ -1,15 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryController : MonoBehaviour
 {
-    public InventaryManager inventary;
     [SerializeField] private GameObject _cellPrefab;
+
+    public InventoryManager inventary;
+    
 
     private void Start()
     {
         UpdateUI();
         inventary.UpdateInverntaryEvent.AddListener(UpdateUI);
+        Create();
     }
 
     public void UpdateUI() {
@@ -19,6 +23,20 @@ public class InventoryController : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             cells[i].DataItem = items[i];
+            cells[i].Select(i == inventary.SelectCell);
+            
+        }
+    }
+
+    public void Create()
+    {
+        Clear();
+        List<Item> items = inventary.ItemsList;
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            GameObject obj = Instantiate(_cellPrefab, transform);
+            obj.GetComponent<InventaryCellController>().Index = i;
         }
     }
 
@@ -28,7 +46,8 @@ public class InventoryController : MonoBehaviour
 
         foreach (InventaryCellController cell in cells)
         {
-            cell.DataItem = null;
+            Destroy(cell.gameObject);
         }
     }
+
 }
