@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112bda030b9555c4d84ff82e933024e4, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: Assembly-CSharp::ToolData
+  _name: Axe
+  _description: Use to chop wood
+  _icon: {fileID: 21300000, guid: 280787b5d890df4489f6a2ed925a8112, type: 3}
+  _prefab: {fileID: 935636255104512630, guid: e5a7c56db373fc54c8e1de3d90fac5dd, type: 3}
+  _craftComponents:
+  - _item: {fileID: 11400000, guid: 78b44c1a302058447966e951a227c07c, type: 2}
+    _count: 1
+  - _item: {fileID: 11400000, guid: 19e7709665d20de44b1199169d40d9b8, type: 2}
+    _count: 1
