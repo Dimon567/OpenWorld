@@ -56,13 +56,13 @@ public class InventaryCellController : MonoBehaviour
         if (_item != null)
         {
             _label.enabled = isSelect;
-            _imageFrame.enabled = isSelect;
         }
+        _imageFrame.enabled = isSelect;
     }
 
-    private void OnSelect()
+    public void OnSelect()
     {
-        Select(true);
-        SelectItem.Invoke(index);
+        SelectItem?.Invoke(index);
+        
     }
 }

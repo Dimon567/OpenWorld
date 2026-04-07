@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
                 }
                 Item item = hit.collider.gameObject.GetComponent<Item>();
 
-                inventary.AddItem(item, index);
+                inventary.AddItem(item, inventary.SelectCell);
 
                 item.gameObject.SetActive(false);
             }

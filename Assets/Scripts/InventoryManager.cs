@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
         set {
             if (value >= 0 || value < _inventary.Count) { 
                 _selectCell = value;
-                UpdateInverntaryEvent.Invoke();
+                UpdateInverntaryEvent?.Invoke();
             }
         }
         get { 
@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
 
         _inventary[index] = null;
 
-        UpdateInverntaryEvent.Invoke();
+        UpdateInverntaryEvent?.Invoke();
     }
 
     public bool AddItem(Item item, int index)
@@ -56,7 +56,7 @@ public class InventoryManager : MonoBehaviour
 
         _inventary[index] = item;
 
-        UpdateInverntaryEvent.Invoke();
+        UpdateInverntaryEvent?.Invoke();
         return true;
     }
 
@@ -87,7 +87,7 @@ public class InventoryManager : MonoBehaviour
     private void OnSelectCell(int index)
     {
         SelectCell = index;
-        Debug.Log(1);
+        UpdateInverntaryEvent?.Invoke();
     }
 
     private void OnEnable()
