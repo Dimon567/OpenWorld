@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemContenerManager : MonoBehaviour
 {
+    public List<ItemData> items = new List<ItemData>();
 
     public static ItemContenerManager instance;
 
@@ -35,16 +37,21 @@ public class ItemContenerManager : MonoBehaviour
 
     public bool IsOnScene(Item findItem)
     {
-        Item[] items = GetComponentsInChildren<Item>();
+        if (findItem.gameObject != null) { 
+            return true;
+        }
+        return false;
+    }
 
-        foreach (Item item in items)
+    public ItemData GetItemByPicture(string pictureName)
+    {
+        foreach (ItemData data in items)
         {
-            if (findItem == item)
+            if (data.Icon.name == pictureName)
             {
-                return true;
+                return data;
             }
         }
-
-        return false;
+        return null;
     }
 }

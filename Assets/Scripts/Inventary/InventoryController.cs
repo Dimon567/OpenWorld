@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -30,17 +31,16 @@ public class InventoryController : MonoBehaviour
         _dropButton.gameObject.SetActive(false);
         _equipButton .gameObject.SetActive(false);
 
-        Debug.Log(_inventoryContener.childCount);
         for (int i = 0; i < items.Count; i++)
         {
             cells[i].DataItem = items[i];
 
             if (inventary.SelectCell != null && i == inventary.SelectCell)
             {
-                Debug.Log(i);
                 cells[i].Select(true);
                 Vector3 position = _buttonsGroup.transform.position;
                 position = new Vector3(cells[i].transform.position.x, position.y, position.z);
+                GameManager.instance.transform.position = cells[i].transform.position;
 
                 if (inventary.GetSelectItem != null)
                 {

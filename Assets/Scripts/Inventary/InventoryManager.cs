@@ -66,7 +66,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         Item item = _inventary[index];
-        _inventary = null;
+        RemoveItemAt(index);
 
         return item;
     }
