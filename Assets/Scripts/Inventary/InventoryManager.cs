@@ -41,6 +41,11 @@ public class InventoryManager : MonoBehaviour
         } 
     }
 
+    public Item GetSelectItem
+    {
+        get { return _inventary[_selectCell]; }
+    }
+
     public void RemoveItemAt(int index)
     {
         if (index < 0 || index >= _inventary.Count)
@@ -51,6 +56,19 @@ public class InventoryManager : MonoBehaviour
         _inventary[index] = null;
 
         UpdateInverntaryEvent?.Invoke();
+    }
+
+    public Item ExtractItemAt(int index)
+    {
+        if (index < 0 || index >= _inventary.Count)
+        {
+            return null;
+        }
+
+        Item item = _inventary[index];
+        _inventary = null;
+
+        return item;
     }
 
     public bool AddItem(Item item, int index)
@@ -88,7 +106,6 @@ public class InventoryManager : MonoBehaviour
 
         return _inventary[index] == null;
     }
-
 
     private void OnSelectCell(int index)
     {
