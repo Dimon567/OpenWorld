@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3034648661487137627}
   - component: {fileID: 1617349819898714258}
   - component: {fileID: 6314896412028465552}
+  - component: {fileID: 6829656746881206576}
   m_Layer: 5
   m_Name: CraftItemCellButton
   m_TagString: Untagged
@@ -194,5 +195,22 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1617349819898714258}
   m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6829656746881206576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4589066506461613524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b13279d88405dd4ab865f4449f01930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuCraftItemCell
+  icon: {fileID: 3226429679436172649}
+  button: {fileID: 6314896412028465552}
+  OnCraftItemSelect:
     m_PersistentCalls:
       m_Calls: []

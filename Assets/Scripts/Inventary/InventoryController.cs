@@ -1,10 +1,16 @@
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
     [SerializeField] private GameObject _cellPrefab;
+    [SerializeField] private Transform _inventoryContener;
+    [SerializeField] private Transform _buttonsGroup;
+    [SerializeField] private Button _dropButton;
+    [SerializeField] private Button _equipButton;
 
     public InventoryManager inventary;
     
@@ -13,18 +19,38 @@ public class InventoryController : MonoBehaviour
     {
         UpdateUI();
         inventary.UpdateInverntaryEvent.AddListener(UpdateUI);
+        _dropButton.onClick.AddListener(DropItem);
+        _equipButton.onClick.AddListener(EquipItem);
         Create();
     }
 
     public void UpdateUI() {
         List<Item> items = inventary.ItemsList;
-        InventaryCellController[] cells = GetComponentsInChildren<InventaryCellController>();
+        InventaryCellController[] cells = _inventoryContener.GetComponentsInChildren<InventaryCellController>();
+
+        _dropButton.gameObject.SetActive(false);
+        _equipButton .gameObject.SetActive(false);
 
         for (int i = 0; i < items.Count; i++)
         {
             cells[i].DataItem = items[i];
-            cells[i].Select(i == inventary.SelectCell);
+
+            if (inventary.SelectCell != null && i == inventary.SelectCell)
+            {
+                cells[i].Select(true);
+                Vector3 position = _buttonsGroup.transform.position;
+                position = new Vector3(cells[i].transform.position.x, position.y, position.z);
+                GameManager.instance.transform.position = cells[i].transform.position;
+
+                if (inventary.GetSelectItem != null)
+                {
+                    _dropButton.gameObject.SetActive(true);
+                }
+                
+                continue;
+            }
             
+            cells[i].Select(false);
         }
     }
 
@@ -35,19 +61,38 @@ public class InventoryController : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
         {
-            GameObject obj = Instantiate(_cellPrefab, transform);
+            GameObject obj = Instantiate(_cellPrefab, _inventoryContener);
             obj.GetComponent<InventaryCellController>().Index = i;
         }
     }
 
     public void Clear()
     {
-        InventaryCellController[] cells = GetComponentsInChildren<InventaryCellController>();
+        InventaryCellController[] cells = _inventoryContener.GetComponentsInChildren<InventaryCellController>();
 
         foreach (InventaryCellController cell in cells)
         {
             Destroy(cell.gameObject);
         }
+    }
+
+    public void DropItem()
+    {
+        Item item = inventary.ExtractItemAt(inventary.SelectCell);
+
+        if (item == null)
+        {
+            return;
+        }
+
+        Vector3 position = GameManager.instance.player.transform.position;
+
+        ItemContenerManager.instance.SpawnItem(item, position);
+    }
+
+    public void EquipItem()
+    {
+
     }
 
 }

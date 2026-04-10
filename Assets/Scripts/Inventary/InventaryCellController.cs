@@ -57,6 +57,8 @@ public class InventaryCellController : MonoBehaviour
         {
             _label.enabled = isSelect;
         }
+        Debug.Log(_imageFrame);
+        Debug.Log(index);
         _imageFrame.enabled = isSelect;
     }
 

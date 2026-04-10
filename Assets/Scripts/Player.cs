@@ -1,5 +1,3 @@
-using UnityEditor.Actions;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,10 +16,17 @@ public class Player : MonoBehaviour
     [SerializeField] private int _curTemprature;
 
     [SerializeField] private int _speed;
-    [SerializeField] private bool _isRun; 
+    [SerializeField] private bool _isRun;
 
     public InventoryManager inventary;
     public Vector2 direction;
+
+
+    public Vector3 GetPosition{
+        get {
+            return gameObject.transform.position;
+        }
+    }
 
     void Start()
     {
@@ -85,4 +90,6 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+
 }

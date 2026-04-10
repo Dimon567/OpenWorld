@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CraftController : MonoBehaviour
 {
     [SerializeField] private GameObject _itemsMenu;
-    [SerializeField] private GameObject _itemCraftMenu;
+    [SerializeField] private CraftItemController _itemCraftMenu;
     [SerializeField] private string _iconPath;
     [SerializeField] private GameObject _craftCellPrefab;
     [SerializeField] private TextMeshProUGUI title;
@@ -26,7 +26,7 @@ public class CraftController : MonoBehaviour
         {
             GameObject obj = Instantiate(_craftCellPrefab, craftsContaner);
             obj.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
-            
+            obj.GetComponent<MenuCraftItemCell>().OnCraftItemSelect.AddListener(SelectCraftItem);
         }
     }
 
@@ -38,5 +38,31 @@ public class CraftController : MonoBehaviour
         }
     }
 
+    public void OpenCraft()
+    {
+        bool isOpen = this.gameObject.activeSelf;
+        this.gameObject.SetActive(!isOpen);
+
+        if (isOpen)
+        {
+            _itemsMenu.SetActive(false);
+            _itemCraftMenu.gameObject.SetActive(false);
+        }
+    }
+
+    public void SelectCraftItem(string iconName)
+    {
+        ItemData data = ItemContenerManager.instance.GetItemByPicture(iconName);
+        if (data == null)
+        {
+            return;
+        }
+
+        _itemCraftMenu.gameObject.SetActive(true);
+        _itemCraftMenu.item = data;
+        _itemCraftMenu.UpdateUI();
+    }
+
+    
 
 }
