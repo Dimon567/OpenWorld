@@ -114,10 +114,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-<<<<<<< HEAD
-    - rid: -2
-      type: {class: , ns: , asm: }
-=======
     - rid: 19428583739490304
       type: {class: WorldRenderPipelineResources, ns: UnityEngine.PathTracing.Core, asm: Unity.PathTracing.Runtime}
       data:
@@ -129,7 +125,6 @@ MonoBehaviour:
         _skyBoxMesh: {fileID: 4300000, guid: 0529e6c5f6dea8c4a8c2835ed7de57cb, type: 2}
         _sixFaceSkyBoxMesh: {fileID: 4300000, guid: a80925ceebd011741b42509226cefc74, type: 2}
         _buildLightGridShader: {fileID: 7200000, guid: 16e47c1641bd0104e92b624601457bb0, type: 3}
->>>>>>> cd9da03ca6cd72e41fb651aa5853c600f0281aaf
     - rid: 3204856547389734912
       type: {class: PostProcessData/ShaderResources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
